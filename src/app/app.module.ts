@@ -12,14 +12,21 @@ import { Routes } from '@angular/router';
 import { BamModule } from './Bam/bam.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
+import { JanusComponent } from './janus/janus.component';
 
 
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'Caliber', loadChildren: './Caliber/caliber.module#CaliberModule'},
-  {path: 'Bam', loadChildren: './Bam/bam.module#BamModule'},
+  {
+    path: '',
+    component: JanusComponent,
+    children: [
+      {path: 'dashboard', component: DashboardComponent},
+      {path: 'Caliber', loadChildren: './Caliber/caliber.module#CaliberModule'},
+      {path: 'Bam', loadChildren: './Bam/bam.module#BamModule'},
+    ]
+  },
   {path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 
@@ -36,6 +43,7 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    JanusComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

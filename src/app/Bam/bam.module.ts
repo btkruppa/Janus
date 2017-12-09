@@ -21,7 +21,6 @@ import { CalendarComponent } from './calendar/calendar.component';
     NgbModule.forRoot(),
     FormsModule,
     RouterModule.forChild(routes),
-    NavModule
   ],
   declarations: [
     BamComponent,

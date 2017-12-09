@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Title } from '@angular/platform-browser';
 import { App } from '../entities/app';
 import { environment } from '../../environments/environment';
+import { janusGlobal } from '../../environments/janusGlobal';
 
 @Component({
   selector: 'app-nav',
@@ -13,27 +14,29 @@ import { environment } from '../../environments/environment';
 })
 export class NavComponent implements OnInit, OnDestroy {
   collapsed = true;
-  currentApp: String = 'Select Application';
-  apps: Array<App> = [];
-  private urlSubscription: Subscription;
+  currentApp = 'Select Application';
+  apps: Array<App> = janusGlobal.apps;
+  urlSubscription: Subscription;
 
   constructor(private title: Title, private router: Router) { }
 
   ngOnInit() {
     this.processUrl(this.router.url);
-    this.apps = environment.apps;
+    this.urlSubscription = this.router.events.subscribe( (navigation) => {
+      if (navigation instanceof NavigationEnd) {
+        this.processUrl(navigation.urlAfterRedirects);
+      }
+    });
   }
 
   private processUrl(url: String) {
-    console.log(this);
-    console.log(this.currentApp);
-    if (url.startsWith('/Caliber')) {
-      this.currentApp = 'Caliber';
-      this.title.setTitle('Janus | Caliber')
-    } else if (url.startsWith('/Bam')) {
-      this.currentApp = 'Bam';
-      this.title.setTitle('Janus | Bam');
-    }
+    this.apps.some( (app) => {
+      if (url.startsWith(app.baseUrl)) {
+        this.currentApp = app.name;
+        this.title.setTitle(`Janus | ${app.name}`);
+      }
+      return false;
+    });
   }
 
   toggleCollapse() {
@@ -43,7 +46,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
   // clean up subscriptions
   ngOnDestroy() {
-
+    this.urlSubscription.unsubscribe();
   }
 
 }

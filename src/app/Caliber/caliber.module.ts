@@ -22,7 +22,6 @@ import { CommonModule } from '@angular/common';
     NgbModule.forRoot(),
     RouterModule.forChild(routes),
     FormsModule,
-    NavModule
   ],
   declarations: [
     CaliberComponent,
