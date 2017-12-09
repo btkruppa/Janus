@@ -26,6 +26,7 @@ const routes: Routes = [
       {path: 'dashboard', component: DashboardComponent},
       {path: 'Caliber', loadChildren: './Caliber/caliber.module#CaliberModule'},
       {path: 'Bam', loadChildren: './Bam/bam.module#BamModule'},
+      {path: '**', pathMatch: 'full', redirectTo: '/dashboard'}
     ]
   },
   {path: '**', pathMatch: 'full', redirectTo: 'login'}
