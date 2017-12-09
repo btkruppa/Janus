@@ -13,6 +13,7 @@ import { BamModule } from './Bam/bam.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './janus/janus.component';
+import { ChuckNorrisService } from './services/chuck-norris.service';
 
 
 // loading routes from child modules this way will lazy load them
@@ -45,7 +46,9 @@ const routes: Routes = [
     DashboardComponent,
     JanusComponent,
   ],
-  providers: [],
+  providers: [
+    ChuckNorrisService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
