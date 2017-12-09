@@ -7,15 +7,17 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
-import { appRoutes } from './app.routes';
 import { CaliberModule } from './Caliber/caliber.module';
-import { Routes } from '@angular/router/src/config';
+import { Routes } from '@angular/router';
 import { BamModule } from './Bam/bam.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavModule } from './nav/nav.module';
 
 
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'Caliber', loadChildren: './Caliber/caliber.module#CaliberModule'},
   {path: 'Bam', loadChildren: './Bam/bam.module#BamModule'},
   {path: '**', pathMatch: 'full', redirectTo: 'login'}
@@ -27,11 +29,13 @@ const routes: Routes = [
     HttpModule,
     NgbModule.forRoot(),
     FormsModule,
+    NavModule,
     RouterModule.forRoot(routes, { useHash: true }),
   ],
   declarations: [
     AppComponent,
     LoginComponent,
+    DashboardComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

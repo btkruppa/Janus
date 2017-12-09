@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-  <img routerLink="/Caliber/home" class="rev-logo" src="assets/rev-logo.png" alt="revature">
+  <img routerLink="/dashboard" class="rev-logo" src="assets/rev-logo.png" alt="revature">
   <button class="navbar-toggler" (click)="toggleCollapse()" aria-label="Toggle navigation">
     {{currentApp}} <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,9 +9,7 @@
       <li ngbDropdown class="d-inline-block">
         <a class="nav-link dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>{{currentApp}}</a>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1"  (click)="toggleCollapse()">
-          <button class="dropdown-item" routerLink="/Caliber/home">Caliber</button>
-          <button class="dropdown-item" routerLink="/Bam/home">Bam</button>
-          <button class="dropdown-item" routerLink="/AssignForce/home">Assign Force</button>
+          <button *ngFor="let app of apps" class="dropdown-item" [routerLink]="app.homeUrl"> {{ app.name }} </button>
         </div>
       </li>
     </ul>

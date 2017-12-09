@@ -6,5 +6,18 @@
 export const environment = {
   production: false,
   context: 'http://localhost:8080/test-app/',
-  bootContext: 'http://localhost/'
+  bootContext: 'http://localhost/',
+  apps: [
+    {
+      name: 'Caliber',
+      homeUrl: '/Caliber/home'
+    },
+    {
+      name: 'Bam',
+      homeUrl: '/Bam/home'
+    }, {
+      name: 'Assign Force',
+      homeUrl: '/AssignForce/home'
+    }
+  ]
 };

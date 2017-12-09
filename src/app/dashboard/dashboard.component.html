@@ -1,0 +1,11 @@
+<app-nav></app-nav>
+<div class="dashboard-container">
+
+  <div class="card app-card" style="width: 20rem;" *ngFor="let app of apps" [routerLink]="app.homeUrl">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-block">
+      {{app.name}}
+    </div>
+  </div>
+
+</div>
