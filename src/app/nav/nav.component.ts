@@ -14,7 +14,7 @@ import { janusGlobal } from '../../environments/janusGlobal';
 })
 export class NavComponent implements OnInit, OnDestroy {
   collapsed = true;
-  currentApp = 'Select Application';
+  currentApp = 'Janus';
   apps: Array<App> = janusGlobal.apps;
   urlSubscription: Subscription;
 
@@ -30,10 +30,15 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   private processUrl(url: String) {
-    this.apps.some( (app) => {
+    this.apps.some( (app, index) => {
       if (url.startsWith(app.baseUrl)) {
         this.currentApp = app.name;
         this.title.setTitle(`Janus | ${app.name}`);
+        return true; // returning true when using .some stops it from having to iterate further
+      }
+      if (index === this.apps.length - 1) {
+        this.currentApp = 'Janus';
+        this.title.setTitle('Janus');
       }
       return false;
     });
